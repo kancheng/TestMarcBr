@@ -189,11 +189,13 @@ filter.fiv.su = function(data, scientific.notation = FALSE){
 
 
 # ARCH & GARCH -> fGarch
+# ...
 
 # Granger Causality test
+# ...
 
 # Augmented Dickey-Fuller Test
-
+# ...
 
 ######
 
