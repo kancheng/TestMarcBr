@@ -1,6 +1,4 @@
-﻿
-
-# 套件匯入更新與判斷
+﻿# 套件匯入更新與判斷
 # install.packages("broom")
 # install.packages("mFilter")
 
@@ -189,17 +187,12 @@ filter.fiv.su = function(data, scientific.notation = FALSE){
 # filter.fiv.su(ts.tdo, TRUE)
 # filter.fiv.su(ts.tdo)
 
-# 自動繪圖
 
-filter.plot = function( data, main.name) {
+# ARCH & GARCH -> fGarch
 
-}
+# Granger Causality test
 
-# 中國經濟分析 ALL
-
-cn.mac = function() {
-
-}
+# Augmented Dickey-Fuller Test
 
 
 ######
@@ -221,3 +214,17 @@ cn.mac = function() {
 # lines(cn.gdp.1y.ts.bw$trend,col=5)
 # lines(cn.gdp.1y.ts.tr$trend,col=6)
 # legend("topleft",legend=c("series", "HP","BK","CF","BW", "TR"),col=1:6, lty=rep(1,6),ncol=2)
+
+# 自動繪圖
+
+filter.plot = function( data, main.name) {
+
+}
+
+# 中國經濟分析 ALL
+
+cn.mac = function() {
+
+}
+
+
