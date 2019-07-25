@@ -38,6 +38,29 @@ tde = c(
 	820099.5,	# 2017
 	896915.6	# 2018
 )
+
+tde.d = c(
+	9.1549498489479840000000098,	# 2000
+	1.2549498482161202139479849,	# 2001
+	1.4541234564812120519479849,	# 2002
+	1.3054949848947465656469849,	# 2003
+	1.4549498445645645689479849,	# 2004
+	1.9549498487879789679479849,	# 2005
+	2.5049848797897897889479849,	# 2006
+	2.6564541414841226661651006,	# 2007
+	3.5549498489402102025179849,	# 2008
+	3.9549498400000098799479849,	# 2009
+	4.1549498789798874890479849,	# 2010
+	4.8549478978897077899479849,	# 2011
+	2.5464545194114098952995200,	# 2012
+	5.2549498489451200251079849,	# 2013
+	6.6549498489789789789479849,	# 2014
+	6.5549498489998798978479849,	# 2015
+	1.6667489418419498484894948,	# 2016
+	1.5547897897897849489479849,	# 2017
+	1.7899789788454949848947984	# 2018
+)
+
 tdo = c(
 	109276.2,	# 2001
 	120480.4,	# 2002
@@ -61,19 +84,36 @@ tdo = c(
 
 ts.tdo = ts(tdo, frequency = 1, start = c(2001, 1) )
 ts.tde = ts(tde, frequency = 1, start = c(2000, 1) )
+ts.tde.d = ts(tde.d, frequency = 1, start = c(2000, 1) )
 
 # 敘述統計 -> minimum , q1, median, mean, q3, maximum, na, sd, var, range.
 
-sumy = function(su.data){
+sumy = function(su.data , digits.use = FALSE , digits.nm = 4){
 	tem.su.all = data.frame(
 		minimum = numeric(), q1 = numeric(), median = numeric(), 
 		mean = numeric(), q3 = numeric(), maximum = numeric(), 
 		na = numeric(), sd = numeric(), var = numeric(), range = numeric()
 	)
-	tem.sumy = summary( su.data, na.rm = TRUE)
-	assign( "sd", sd(su.data, na.rm = TRUE))
-	assign( "var", var(su.data, na.rm = TRUE))
-	assign( "range", range( su.data, na.rm = TRUE)[2]-range( su.data, na.rm = TRUE)[1])
+
+	if (digits.use == TRUE) {
+		h.sumy = summary( su.data, na.rm = TRUE, digits = digits.nm)
+		print(1)
+		h.sd = round(sd(su.data, na.rm = TRUE), digits.nm)
+		h.var = round(var(su.data, na.rm = TRUE), digits.nm)
+		h.range = round(range( su.data, na.rm = TRUE)[2]-range( su.data, na.rm = TRUE)[1], digits.nm)
+	}
+
+	if (digits.use == FALSE){
+		print(2)
+		h.sumy = summary( su.data, na.rm = TRUE)
+		h.sd = sd(su.data, na.rm = TRUE)
+		h.var = var(su.data, na.rm = TRUE)
+		h.range = range( su.data, na.rm = TRUE)[2]-range( su.data, na.rm = TRUE)[1]
+	}
+	tem.sumy = h.sumy
+	assign( "sd", h.sd)
+	assign( "var", h.var)
+	assign( "range", h.range)
 	assign( "na", c(0))
 	tem.su.df = tidy(tem.sumy)
 	if ( length(grep("na",names(tem.su.df)))>0){
@@ -88,6 +128,7 @@ sumy = function(su.data){
 
 # EX
 # sumy(ts.tde)
+# sumy(ts.tde.d, TRUE, 2)
 
 # 5 種濾波法處理與 TR 法判斷
 
